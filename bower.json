@@ -10,7 +10,8 @@
     "purescript-prelude": "^4.1.1",
     "purescript-console": "^4.4.0",
     "purescript-effect": "^2.0.1",
-    "purescript-math": "^2.1.1"
+    "purescript-math": "^2.1.1",
+    "purescript-sets": "^3.2.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0"

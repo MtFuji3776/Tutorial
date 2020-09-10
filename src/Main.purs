@@ -5,7 +5,7 @@ import Effect (Effect)
 import Effect.Console (log,logShow)
 import Math(sqrt)
 
-
+diagonal :: Number -> Number -> Number
 diagonal w h = sqrt (w*w + h*h)
 
 main :: Effect Unit

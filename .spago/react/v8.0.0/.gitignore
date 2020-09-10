@@ -1,0 +1,7 @@
+.psci*
+bower_components/
+node_modules/
+output/
+yarn-error.log
+.psc-package
+.psc-ide-port

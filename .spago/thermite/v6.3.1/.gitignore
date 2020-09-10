@@ -1,0 +1,11 @@
+.*
+!/.bowerrc
+!/.gitignore
+!/.travis.yml
+/output/
+/node_modules/
+/bower_components/
+/tmp/
+/html/index.js
+package-lock.json
+/.spago/

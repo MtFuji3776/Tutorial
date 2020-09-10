@@ -1,0 +1,7 @@
+{
+  "name": "purescript-react",
+  "files": [],
+  "peerDependencies": {
+    "react": "^16.3.0"
+  }
+}
