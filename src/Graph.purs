@@ -26,8 +26,8 @@ instance semiringGraph :: Semiring (Graph a) where
     one       = Empty
 
 instance functorGraph :: Functor Graph where
-    map f g = case g of Empty -> Empty -- prscではcaseに;がつかないことに注意
-                        Vertex x -> Vertex (f x)
+    map f g = case g of Empty         -> Empty -- prscではcaseに;がつかないことに注意
+                        Vertex x      -> Vertex (f x)
                         Overlay g1 g2 -> Overlay (map f g1) (map f g2)
                         Connect g1 g2 -> Connect (map f g1) (map f g2)
 
@@ -79,3 +79,15 @@ instance showRose :: Show a => Show (Rose a) where
 
 instance functorRose :: Functor Rose where
   map f (Node x ts) = Node (f x) $ map (map f) ts
+
+genRose_ :: forall a . Eq a => a -> Array (Tuple a a) -> Rose a
+genRose_ n [] = Node n []
+genRose_ n es = let es' = filter (\t -> fst t == n) es
+                    es1 = map snd es'
+                    es_ = filter (\t -> fst t /= n) es
+               in Node n $ map (flip genRose_ es_) es1
+
+
+genRose :: forall a . Eq a => Ord a => a -> Graph a -> Rose a
+genRose n g = let es = snd $ destruct g
+              in genRose_ n es
