@@ -26,7 +26,7 @@ instance semiringGraph :: Semiring (Graph a) where
     one       = Empty
 
 instance functorGraph :: Functor Graph where
-    map f g = case g of Empty -> Empty
+    map f g = case g of Empty -> Empty -- prscではcaseに;がつかないことに注意
                         Vertex x -> Vertex (f x)
                         Overlay g1 g2 -> Overlay (map f g1) (map f g2)
                         Connect g1 g2 -> Connect (map f g1) (map f g2)
@@ -69,3 +69,13 @@ genEdges ts = let toedge (Tuple x y) = Connect (Vertex x) (Vertex y)
 graph :: forall a . Ord a => Tuple (Array a) (Array (Tuple a a)) -> Graph a
 graph ts = let cross f g (Tuple x y) = Tuple (f x) (g y)
            in uncurry Overlay $ cross genVertices genEdges ts
+
+
+-- 多分木
+data Rose a = Node a (Array (Rose a))
+
+instance showRose :: Show a => Show (Rose a) where
+    show (Node x ts) = "Node " <> show x <>  " (" <> (foldr (\x ys -> show x <> ys) "" ts) <> ")"
+
+instance functorRose :: Functor Rose where
+  map f (Node x ts) = Node (f x) $ map (map f) ts
